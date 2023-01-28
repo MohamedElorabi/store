@@ -16,7 +16,8 @@
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "mcamara/laravel-localization": "^1.7",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -42,6 +43,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Helpers/general.php"
         ]
     },
     "autoload-dev": {

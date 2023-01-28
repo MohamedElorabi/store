@@ -2,6 +2,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 /*
@@ -15,9 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+
+
+
+
+
 Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'admin'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::group(['prefix'=>'settings'], function (){
+
+       Route::get('shipping-methods/{type}', 'SettingController@editShippingMethods')->name('edit.shippings.methods');
+       Route::post('shipping-methods/{id}', 'SettingController@updateShippingMethods')->name('update.shippings.methods');
+
+
+    });
 
 });
 
@@ -30,3 +50,5 @@ Route::group(['namespace'=>'Dashboard' , 'middleware'=>'guest:admin','prefix'=>'
 });
 
 
+
+});
