@@ -40,7 +40,7 @@
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css"
-          href="{{asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
+          href="{{asset('assets/admin/'.getFolder().'/core/menu/menu-types/vertical-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/'.getFolder().'/core/colors/palette-gradient.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/fonts/simple-line-icons/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/'.getFolder().'/core/colors/palette-gradient.css')}}">

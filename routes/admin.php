@@ -2,7 +2,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 /*
@@ -34,7 +33,7 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'a
     Route::group(['prefix'=>'settings'], function (){
 
        Route::get('shipping-methods/{type}', 'SettingController@editShippingMethods')->name('edit.shippings.methods');
-       Route::post('shipping-methods/{id}', 'SettingController@updateShippingMethods')->name('update.shippings.methods');
+       Route::put('shipping-methods/{id}', 'SettingController@updateShippingMethods')->name('update.shippings.methods');
 
 
     });
@@ -42,7 +41,7 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'a
 });
 
 
-Route::group(['namespace'=>'Dashboard' , 'middleware'=>'guest:admin','prefix'=>'admin'], function () {
+Route::group(['namespace'=>'Dashboard' , 'middleware'=>'guest:admin' , 'prefix'=>'admin'], function () {
 
     Route::get('/login', 'AuthController@login')->name('admin.login');
 

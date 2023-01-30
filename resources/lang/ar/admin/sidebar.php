@@ -4,7 +4,7 @@ return [
 
 
 
-    'sittings' => 'الإعدادات',
+    'settings' => 'الإعدادات',
     'shipping methods' => 'وسائل التوصيل',
 
 ];
