@@ -25,4 +25,18 @@ class AuthController extends Controller
 
         return redirect()->back()->with(['error'=> 'هناك خطأ بالبيانات']);
     }
+
+
+    public function logout()
+    {
+        $guard = $this->getGuard();
+        $guard->logout();
+
+        return redirect()->route('admin.login');
+    }
+
+    private function getGuard()
+    {
+        return auth('admin');
+    }
 }
