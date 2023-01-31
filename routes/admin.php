@@ -32,11 +32,14 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'a
     Route::get('logout', 'AuthController@logout')->name('admin.logout');
 
     Route::group(['prefix'=>'settings'], function (){
-
        Route::get('shipping-methods/{type}', 'SettingController@editShippingMethods')->name('edit.shippings.methods');
        Route::put('shipping-methods/{id}', 'SettingController@updateShippingMethods')->name('update.shippings.methods');
 
+    });
 
+    Route::group(['prefix'=>'profile'], function (){
+        Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
+        Route::put('update/', 'SettingController@updateProfile')->name('update.profile');
     });
 
 });
