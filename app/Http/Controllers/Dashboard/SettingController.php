@@ -32,7 +32,6 @@ class SettingController extends Controller
     {
 
         try {
-
             // update
             $shipping_method = Setting::find($id);
 
@@ -52,7 +51,5 @@ class SettingController extends Controller
             DB::rollBack();
 
         }
-
-
     }
 }

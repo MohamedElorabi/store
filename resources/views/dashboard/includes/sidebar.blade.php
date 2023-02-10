@@ -24,31 +24,44 @@
 
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسيه </span>
+                    <span class="menu-title" data-i18n="nav.dash.main">{{__('admin/sidebar.main categories')}}</span>
                     <span
-                        class="badge badge badge-danger badge-pill float-right mr-2"></span>
+                        class="badge badge badge-danger badge-pill float-right mr-2">{{\App\Models\Category::whereNull('parent_id')->count()}}</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
-                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    <li class="active"><a class="menu-item" href="{{route('admin.maincategories')}}"
+                                          data-i18n="nav.dash.ecommerce">{{__('admin/sidebar.view all')}}</a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
-                             قسم جديد </a>
+                    <li><a class="menu-item" href="{{route('admin.maincategories.create')}}" data-i18n="nav.dash.crypto">{{__('admin/sidebar.add a new main category')}}</a>
                     </li>
                 </ul>
             </li>
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية   </span>
+                    <span class="menu-title" data-i18n="nav.dash.main">{{__('admin/sidebar.sub categories')}}</span>
                     <span
                         class="badge badge badge-danger badge-pill float-right mr-2">400</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
-                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    <li class="active"><a class="menu-item" href="{{route('admin.subcategories')}}"
+                                          data-i18n="nav.dash.ecommerce">{{__('admin/sidebar.view all')}}</a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
-                            قسم فرعي جديد </a>
+                    <li><a class="menu-item" href="{{route('admin.subcategories.create')}}" data-i18n="nav.dash.crypto">{{__('admin/sidebar.add a new sub category')}}</a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item"><a href=""><i class="la la-group"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">{{__('admin/sidebar.brands')}}</span>
+                    <span
+                        class="badge badge badge-danger badge-pill float-right mr-2">400</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.brands')}}"
+                                          data-i18n="nav.dash.ecommerce">{{__('admin/sidebar.view all')}}</a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.brands.create')}}" data-i18n="nav.dash.crypto">{{__('admin/sidebar.add a new brand')}}</a>
                     </li>
                 </ul>
             </li>
@@ -105,12 +118,12 @@
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{__('admin/sidebar.shipping methods')}}</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="{{route('edit.shippings.methods','free')}}"
-                                   data-i18n="nav.templates.vert.classic_menu">توصيل مجانى</a>
+                                   data-i18n="nav.templates.vert.classic_menu">{{__('admin/sidebar.free delivery')}}</a>
                             </li>
-                            <li><a class="menu-item" href="{{route('edit.shippings.methods','inner')}}">توصيل داخلى</a>
+                            <li><a class="menu-item" href="{{route('edit.shippings.methods','inner')}}">{{__('admin/sidebar.internal delivery')}}</a>
                             </li>
                             <li><a class="menu-item" href="{{route('edit.shippings.methods','outer')}}"
-                                   data-i18n="nav.templates.vert.compact_menu">توصيل خارجى</a>
+                                   data-i18n="nav.templates.vert.compact_menu">{{__('admin/sidebar.outer delivery')}}</a>
                             </li>
 
                         </ul>
