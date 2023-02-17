@@ -31,17 +31,21 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'a
     Route::get('/home', 'HomeController@index')->name('admin.home');
     Route::get('logout', 'AuthController@logout')->name('admin.logout');
 
+
+    #############################################  settings route    ###########################################
     Route::group(['prefix'=>'settings'], function (){
        Route::get('shipping-methods/{type}', 'SettingController@editShippingMethods')->name('edit.shippings.methods');
        Route::put('shipping-methods/{id}', 'SettingController@updateShippingMethods')->name('update.shippings.methods');
 
     });
+    ############################################# end settings route    ###########################################
 
+    ############################################## profile route         ##########################################
     Route::group(['prefix'=>'profile'], function (){
         Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
         Route::put('update', 'ProfileController@updateProfile')->name('update.profile');
     });
-
+    ############################################ end profile route #################################################
 
     ################################################ categories routes################################################
     Route::group(['prefix'=>'main_categories'], function (){
@@ -56,20 +60,8 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'a
     ################################################ end categories   ###############################################
 
 
-    ################################################ sub categories routes################################################
-    Route::group(['prefix'=>'sub_categories'], function (){
-        Route::get('/', 'SubCategoriesController@index')->name('admin.subcategories');
-        Route::get('create', 'SubCategoriesController@create')->name('admin.subcategories.create');
-        Route::post('store', 'SubCategoriesController@store')->name('admin.subcategories.store');
-        Route::get('edit/{id}', 'SubCategoriesController@edit')->name('admin.subcategories.edit');
-        Route::post('update/{id}', 'SubCategoriesController@update')->name('admin.subcategories.update');
-        Route::get('delete/{id}', 'SubCategoriesController@destroy')->name('admin.subcategories.delete');
 
-    });
-    ################################################ end categories   ###############################################
-
-
-    ################################################ categories routes################################################
+    ################################################ brands routes################################################
     Route::group(['prefix'=>'brands'], function (){
         Route::get('/', 'BrandsController@index')->name('admin.brands');
         Route::get('create', 'BrandsController@create')->name('admin.brands.create');
@@ -79,7 +71,19 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin', 'prefix'=>'a
         Route::get('delete/{id}', 'BrandsController@destroy')->name('admin.brands.delete');
 
     });
-    ################################################ end categories   ###############################################
+    ################################################ end brands   ###############################################
+
+    ################################################ tags routes################################################
+    Route::group(['prefix'=>'tags'], function (){
+        Route::get('/', 'TagsController@index')->name('admin.tags');
+        Route::get('create', 'TagsController@create')->name('admin.tags.create');
+        Route::post('store', 'TagsController@store')->name('admin.tags.store');
+        Route::get('edit/{id}', 'TagsController@edit')->name('admin.tags.edit');
+        Route::post('update/{id}', 'TagsController@update')->name('admin.tags.update');
+        Route::get('delete/{id}', 'TagsController@destroy')->name('admin.tags.delete');
+
+    });
+    ################################################ end tags   ###############################################
 });
 
 

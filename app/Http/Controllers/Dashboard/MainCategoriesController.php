@@ -13,36 +13,38 @@ class MainCategoriesController extends Controller
 
     public function index()
     {
-       $categories = Category::whereNull('parent_id')->paginate(PAGINATION_COUNT);
+       $categories = Category::with('_parent')->orderBy('id','DESC')->paginate(PAGINATION_COUNT);
         return view('dashboard.categories.index', compact('categories'));
     }
 
 
     public function create()
     {
-        return view('dashboard.categories.create');
-
+        $categories = Category::select('id', 'parent_id')->get();
+        return view('dashboard.categories.create', compact('categories'));
     }
 
 
     public function store(MainCategoryRequest $request)
     {
-
         try {
-
             DB::beginTransaction();
             if(!$request->has('is_active'))
                 $request->request->add(['is_active' => 0]);
             else
                 $request->request->add(['is_active' => 1]);
+            // if user choose main category then we must remove parent id from the request
+            if($request -> type == 1)  // main category
+            {
+                $request->request->add(['parent_id' => null]);
+            }
+            // if choose child category we must add parent
 
             $category = Category::create($request->except('_token'));
             // save translation
             $category->name = $request->name;
             $category->save();
-
             return redirect()->route('admin.maincategories')->with(['success', 'تم الإضافة بنجاح']);
-
 
             DB::commit();
         } catch (\Exception $ex) {

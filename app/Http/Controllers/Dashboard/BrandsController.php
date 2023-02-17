@@ -74,26 +74,35 @@ class BrandsController extends Controller
     {
         try {
 
+            $brand = Brand::find($id);
+            if(!$brand)
+                return redirect()->route('admin.brands')->with(['error', 'هذا القسم غير موجود']);
+
+            DB::beginTransaction();
+            if($request->has('photo')){
+
+                $fileName = uploadImage('brands', $request->photo);
+                Brand::where('id',$id)
+                    ->update([
+                        'photo' => $fileName,
+                    ]);
+            }
             if(!$request->has('is_active'))
                 $request->request->add(['is_active' => 0]);
             else
                 $request->request->add(['is_active' => 1]);
 
-            $brand = Brand::find($id);
-
-            if(!$brand)
-                return redirect()->route('admin.brands')->with(['error', 'هذا القسم غير موجود']);
-
-            $brand->update($request->all());
+            $brand->update($request->except('_token', 'id', 'photo'));
 
             // save translation
             $brand->name = $request->name;
             $brand->save();
 
+            DB::commit();
             return redirect()->route('admin.brands')->with(['success', 'تم التحديث بنجاح']);
 
         } catch (\Exception $ex){
-
+            DB::rollBack();
             return redirect()->route('admin.brands')->with(['error', 'حدث خطأ ما']);
         }
     }
